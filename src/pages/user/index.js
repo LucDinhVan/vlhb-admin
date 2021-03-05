@@ -13,7 +13,7 @@ import Modal from './components/Modal'
 @withI18n()
 @connect(({ user, loading }) => ({ user, loading }))
 class User extends PureComponent {
-  handleRefresh = newQuery => {
+  handleRefresh = (newQuery) => {
     const { location } = this.props
     const { query, pathname } = location
 
@@ -24,7 +24,7 @@ class User extends PureComponent {
           ...query,
           ...newQuery,
         },
-        { arrayFormat: 'repeat' }
+        { arrayFormat: 'repeat' },
       ),
     })
   }
@@ -63,7 +63,7 @@ class User extends PureComponent {
         modalType === 'create' ? i18n.t`Create User` : i18n.t`Update User`
       }`,
       centered: true,
-      onOk: data => {
+      onOk: (data) => {
         dispatch({
           type: `user/${modalType}`,
           payload: data,
@@ -87,13 +87,13 @@ class User extends PureComponent {
       dataSource: list,
       loading: loading.effects['user/query'],
       pagination,
-      onChange: page => {
+      onChange: (page) => {
         this.handleRefresh({
           page: page.current,
           pageSize: page.pageSize,
         })
       },
-      onDeleteItem: id => {
+      onDeleteItem: (id) => {
         dispatch({
           type: 'user/delete',
           payload: id,
@@ -117,7 +117,7 @@ class User extends PureComponent {
       },
       rowSelection: {
         selectedRowKeys,
-        onChange: keys => {
+        onChange: (keys) => {
           dispatch({
             type: 'user/updateState',
             payload: {
@@ -138,7 +138,7 @@ class User extends PureComponent {
       filter: {
         ...query,
       },
-      onFilterChange: value => {
+      onFilterChange: (value) => {
         this.handleRefresh({
           ...value,
         })
@@ -164,14 +164,14 @@ class User extends PureComponent {
         {selectedRowKeys.length > 0 && (
           <Row style={{ marginBottom: 24, textAlign: 'right', fontSize: 13 }}>
             <Col>
-              {`Selected ${selectedRowKeys.length} items `}
+              {`Đã chọn ${selectedRowKeys.length} mục `}
               <Popconfirm
-                title="Are you sure delete these items?"
-                placement="left"
+                title='Bạn có chắc chắn xóa những mục này không?'
+                placement='left'
                 onConfirm={this.handleDeleteItems}
               >
-                <Button type="primary" style={{ marginLeft: 8 }}>
-                  Remove
+                <Button type='primary' style={{ marginLeft: 8 }}>
+                  Xoá
                 </Button>
               </Popconfirm>
             </Col>

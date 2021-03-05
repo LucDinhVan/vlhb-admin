@@ -1,11 +1,12 @@
 import { parse } from 'qs'
 import modelExtend from 'dva-model-extend'
 import api from 'api'
-const { pathToRegexp } = require("path-to-regexp")
 import { model } from 'utils/model'
+const { pathToRegexp } = require('path-to-regexp')
 
 const { queryDashboard, queryWeather } = api
-const avatar = '//cdn.antd-admin.zuiidea.com/bc442cf0cc6f7940dcc567e465048d1a8d634493198c4-sPx5BR_fw236.jpeg'
+const avatar =
+  '//cdn.antd-admin.zuiidea.com/bc442cf0cc6f7940dcc567e465048d1a8d634493198c4-sPx5BR_fw236.jpeg'
 
 export default modelExtend(model, {
   namespace: 'dashboard',

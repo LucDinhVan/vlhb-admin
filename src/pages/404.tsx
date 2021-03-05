@@ -1,15 +1,12 @@
 import React from 'react'
-import { FrownOutlined } from '@ant-design/icons'
-import { Page } from 'components'
-import styles from './404.less'
+import { Result } from 'antd'
 
 const Error = () => (
-  <Page inner>
-    <div className={styles.error}>
-      <FrownOutlined />
-      <h1>404 Not Found</h1>
-    </div>
-  </Page>
+  <Result
+    status="404"
+    title="404"
+    subTitle="Xin lỗi, trang bạn đã truy cập không tồn tại."
+  />
 )
 
 export default Error
