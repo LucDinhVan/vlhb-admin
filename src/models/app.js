@@ -3,12 +3,12 @@
 import { history } from 'umi'
 import { stringify } from 'qs'
 import store from 'store'
-const { pathToRegexp } = require("path-to-regexp")
 import { ROLE_TYPE } from 'utils/constant'
 import { queryLayout } from 'utils'
 import { CANCEL_REQUEST_MESSAGE } from 'utils/constant'
 import api from 'api'
 import config from 'config'
+const { pathToRegexp } = require('path-to-regexp')
 
 const { queryRouteList, logoutUser, queryUserInfo } = api
 
@@ -28,7 +28,7 @@ export default {
         id: '1',
         icon: 'laptop',
         name: 'Dashboard',
-        zhName: '仪表盘',
+        viName: 'Bảng điều khiển',
         router: '/dashboard',
       },
     ],
@@ -52,7 +52,7 @@ export default {
       dispatch({ type: 'query' })
     },
     setupHistory({ dispatch, history }) {
-      history.listen(location => {
+      history.listen((location) => {
         dispatch({
           type: 'updateState',
           payload: {
@@ -84,7 +84,7 @@ export default {
         goDashboard()
         return
       }
-      const { locationPathname } = yield select(_ => _.app)
+      const { locationPathname } = yield select((_) => _.app)
       const { success, user } = yield call(queryUserInfo, payload)
       if (success && user) {
         const { list } = yield call(queryRouteList)
@@ -94,9 +94,9 @@ export default {
           permissions.role === ROLE_TYPE.ADMIN ||
           permissions.role === ROLE_TYPE.DEVELOPER
         ) {
-          permissions.visit = list.map(item => item.id)
+          permissions.visit = list.map((item) => item.id)
         } else {
-          routeList = list.filter(item => {
+          routeList = list.filter((item) => {
             const cases = [
               permissions.visit.includes(item.id),
               item.mpid
@@ -104,7 +104,7 @@ export default {
                 : true,
               item.bpid ? permissions.visit.includes(item.bpid) : true,
             ]
-            return cases.every(_ => _)
+            return cases.every((_) => _)
           })
         }
         store.set('routeList', routeList)

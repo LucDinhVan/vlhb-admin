@@ -7,10 +7,10 @@ const database = [
     icon: 'dashboard',
     name: 'Dashboard',
     zh: {
-      name: '仪表盘'
+      name: '仪表盘',
     },
     'pt-br': {
-      name: 'Dashboard'
+      name: 'Dashboard',
     },
     route: '/dashboard',
   },
@@ -19,10 +19,10 @@ const database = [
     breadcrumbParentId: '1',
     name: 'Users',
     zh: {
-      name: '用户管理'
+      name: '用户管理',
     },
     'pt-br': {
-      name: 'Usuário'
+      name: 'Usuário',
     },
     icon: 'user',
     route: '/user',
@@ -32,10 +32,10 @@ const database = [
     breadcrumbParentId: '1',
     name: 'Posts',
     zh: {
-      name: '用户管理'
+      name: '用户管理',
     },
     'pt-br': {
-      name: 'Posts'
+      name: 'Posts',
     },
     icon: 'shopping-cart',
     route: '/post',
@@ -46,10 +46,10 @@ const database = [
     breadcrumbParentId: '2',
     name: 'User Detail',
     zh: {
-      name: '用户详情'
+      name: '用户详情',
     },
     'pt-br': {
-      name: 'Detalhes do usuário'
+      name: 'Detalhes do usuário',
     },
     route: '/user/:id',
   },
@@ -58,10 +58,10 @@ const database = [
     breadcrumbParentId: '1',
     name: 'Request',
     zh: {
-      name: 'Request'
+      name: 'Request',
     },
     'pt-br': {
-      name: 'Requisição'
+      name: 'Requisição',
     },
     icon: 'api',
     route: '/request',
@@ -71,10 +71,10 @@ const database = [
     breadcrumbParentId: '1',
     name: 'UI Element',
     zh: {
-      name: 'UI组件'
+      name: 'UI组件',
     },
     'pt-br': {
-      name: 'Elementos UI'
+      name: 'Elementos UI',
     },
     icon: 'camera-o',
   },
@@ -84,10 +84,10 @@ const database = [
     menuParentId: '4',
     name: 'Editor',
     zh: {
-      name: 'Editor'
+      name: 'Editor',
     },
     'pt-br': {
-      name: 'Editor'
+      name: 'Editor',
     },
     icon: 'edit',
     route: '/editor',
@@ -97,10 +97,10 @@ const database = [
     breadcrumbParentId: '1',
     name: 'Charts',
     zh: {
-      name: 'Charts'
+      name: 'Charts',
     },
     'pt-br': {
-      name: 'Graficos'
+      name: 'Graficos',
     },
     icon: 'code-o',
   },
@@ -110,10 +110,10 @@ const database = [
     menuParentId: '5',
     name: 'ECharts',
     zh: {
-      name: 'ECharts'
+      name: 'ECharts',
     },
     'pt-br': {
-      name: 'ECharts'
+      name: 'ECharts',
     },
     icon: 'line-chart',
     route: '/chart/ECharts',
@@ -124,10 +124,10 @@ const database = [
     menuParentId: '5',
     name: 'HighCharts',
     zh: {
-      name: 'HighCharts'
+      name: 'HighCharts',
     },
     'pt-br': {
-      name: 'HighCharts'
+      name: 'HighCharts',
     },
     icon: 'bar-chart',
     route: '/chart/highCharts',
@@ -138,10 +138,10 @@ const database = [
     menuParentId: '5',
     name: 'Rechartst',
     zh: {
-      name: 'Rechartst'
+      name: 'Rechartst',
     },
     'pt-br': {
-      name: 'Rechartst'
+      name: 'Rechartst',
     },
     icon: 'area-chart',
     route: '/chart/Recharts',

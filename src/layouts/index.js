@@ -3,17 +3,15 @@ import { withRouter } from 'umi'
 import { ConfigProvider } from 'antd'
 import { I18nProvider } from '@lingui/react'
 import { getLocale } from 'utils'
-const { i18n } = require('../../src/utils/config')
-import zh_CN from 'antd/lib/locale-provider/zh_CN'
+import vi_VN from 'antd/lib/locale-provider/vi_VN'
 import en_US from 'antd/lib/locale-provider/en_US'
-import pt_BR from 'antd/lib/locale-provider/pt_BR'
 
 import BaseLayout from './BaseLayout'
+const { i18n } = require('../../src/utils/config')
 
 const languages = {
-  zh: zh_CN,
+  vi: vi_VN,
   en: en_US,
-  'pt-br': pt_BR,
 }
 const { defaultLanguage } = i18n
 
@@ -46,13 +44,13 @@ class Layout extends Component {
     return true
   }
 
-  loadCatalog = async language => {
+  loadCatalog = async (language) => {
     const catalog = await import(
       /* webpackMode: "lazy", webpackChunkName: "i18n-[index]" */
       `@lingui/loader!../locales/${language}/messages.json`
     )
 
-    this.setState(state => ({
+    this.setState((state) => ({
       catalogs: {
         ...state.catalogs,
         [language]: catalog,
