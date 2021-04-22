@@ -2,10 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 import { FilterItem } from 'components'
-
-import { Trans } from '@lingui/react'
-import { Button, Row, Col, DatePicker, Form, Input, Cascader } from 'antd'
-import city from 'utils/city'
+import { Button, Row, Col, DatePicker, Form, Input } from 'antd'
 
 const { Search } = Input
 const { RangePicker } = DatePicker
@@ -26,7 +23,7 @@ const TwoColProps = {
 class Filter extends Component {
   formRef = React.createRef()
 
-  handleFields = fields => {
+  handleFields = (fields) => {
     const { createTime } = fields
     if (createTime && createTime.length) {
       fields.createTime = [
@@ -67,7 +64,7 @@ class Filter extends Component {
   }
 
   render() {
-    const { onAdd, filter, i18n } = this.props
+    const { onAdd, filter } = this.props
     const { name, address } = filter
 
     let initialCreateTime = []
@@ -79,42 +76,30 @@ class Filter extends Component {
     }
 
     return (
-      <Form ref={this.formRef} name="control-ref" initialValues={{ name, address, createTime: initialCreateTime }}>
+      <Form
+        ref={this.formRef}
+        name="control-ref"
+        initialValues={{ name, address, createTime: initialCreateTime }}
+      >
         <Row gutter={24}>
           <Col {...ColProps} xl={{ span: 4 }} md={{ span: 8 }}>
             <Form.Item name="name">
               <Search
-                placeholder={i18n.t`Search Name`}
+                placeholder={`Tìm tên`}
                 onSearch={this.handleSubmit}
               />
             </Form.Item>
           </Col>
           <Col
             {...ColProps}
-            xl={{ span: 4 }}
-            md={{ span: 8 }}
-            id="addressCascader"
-          >
-            <Form.Item name="address">
-              <Cascader
-                style={{ width: '100%' }}
-                options={city}
-                placeholder={i18n.t`Please pick an address`}
-              />
-            </Form.Item>
-          </Col>
-          <Col
-            {...ColProps}
-            xl={{ span: 6 }}
+            xl={{ span: 10 }}
             md={{ span: 8 }}
             sm={{ span: 12 }}
             id="createTimeRangePicker"
           >
-            <FilterItem label={i18n.t`CreateTime`}>
+            <FilterItem label={`Ngày tạo`}>
               <Form.Item name="createTime">
-                <RangePicker
-                  style={{ width: '100%' }}
-                />
+                <RangePicker style={{ width: '100%' }} />
               </Form.Item>
             </FilterItem>
           </Col>
@@ -127,18 +112,19 @@ class Filter extends Component {
             <Row type="flex" align="middle" justify="space-between">
               <div>
                 <Button
-                  type="primary" htmlType="submit"
+                  type="primary"
+                  htmlType="submit"
                   className="margin-right"
                   onClick={this.handleSubmit}
                 >
-                  <Trans>Search</Trans>
+                  Tìm
                 </Button>
                 <Button onClick={this.handleReset}>
-                  <Trans>Reset</Trans>
+                  Reset
                 </Button>
               </div>
               <Button type="ghost" onClick={onAdd}>
-                <Trans>Create</Trans>
+                Thêm
               </Button>
             </Row>
           </Col>

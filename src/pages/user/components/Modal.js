@@ -1,8 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { Form, Input, InputNumber, Radio, Modal, Cascader } from 'antd'
-import { Trans } from '@lingui/react'
-import city from 'utils/city'
+import { Form, Input, Radio, Modal, DatePicker } from 'antd'
+import moment from 'moment';
 
 const FormItem = Form.Item
 
@@ -21,63 +20,91 @@ class UserModal extends PureComponent {
   handleOk = () => {
     const { item = {}, onOk } = this.props
 
-    this.formRef.current.validateFields()
-      .then(values => {
+    this.formRef.current
+      .validateFields()
+      .then((values) => {
         const data = {
           ...values,
+          expiredTime: moment(values.expiredTime.expiredTime).format("X"),
           key: item.key,
         }
-        data.address = data.address.join(' ')
         onOk(data)
       })
-      .catch(errorInfo => {
+      .catch((errorInfo) => {
         console.log(errorInfo)
       })
   }
 
   render() {
-    const { i18n, item = {}, onOk, form, ...modalProps } = this.props
-
+    const { item = {}, onOk, form, ...modalProps } = this.props
     return (
       <Modal {...modalProps} onOk={this.handleOk}>
-        <Form ref={this.formRef} name="control-ref" initialValues={{ ...item, address: item.address && item.address.split(' ') }} layout="horizontal">
-          <FormItem name='name' rules={[{ required: true }]}
-            label={i18n.t`Name`} hasFeedback {...formItemLayout}>
+        <Form
+          ref={this.formRef}
+          name="control-ref"
+          initialValues={{
+            ...item,
+            expiredTime: moment.unix(item.expiredTime),
+          }}
+          layout="horizontal"
+        >
+          <FormItem
+            name="name"
+            rules={[{ required: true }]}
+            label={`Tên người dùng`}
+            hasFeedback
+            {...formItemLayout}
+          >
             <Input />
           </FormItem>
-          <FormItem name='nickName' rules={[{ required: true }]}
-            label={i18n.t`NickName`} hasFeedback {...formItemLayout}>
+          <FormItem
+            name="key"
+            rules={[{ required: true }]}
+            label={`Key`}
+            hasFeedback
+            {...formItemLayout}
+          >
             <Input />
           </FormItem>
-          <FormItem name='isMale' rules={[{ required: true }]}
-            label={i18n.t`Gender`} hasFeedback {...formItemLayout}>
+          <FormItem
+            name="status"
+            rules={[{ required: true }]}
+            label={`Trạng thái`}
+            hasFeedback
+            {...formItemLayout}
+          >
             <Radio.Group>
-              <Radio value>
-                <Trans>Male</Trans>
-              </Radio>
-              <Radio value={false}>
-                <Trans>Female</Trans>
-              </Radio>
+              <Radio value><span role="img" aria-label="Activate">✅</span></Radio>
+              <Radio value={false}><span role="img" aria-label="Deactivate">❌</span></Radio>
             </Radio.Group>
           </FormItem>
-          <FormItem name='age' label={i18n.t`Age`} hasFeedback {...formItemLayout}>
-            <InputNumber min={18} max={100} />
-          </FormItem>
-          <FormItem name='phone' rules={[{ required: true, pattern: /^1[34578]\d{9}$/, message: i18n.t`The input is not valid phone!`, }]}
-            label={i18n.t`Phone`} hasFeedback {...formItemLayout}>
+          <FormItem
+            name="phone"
+            rules={[
+              {
+                required: true,
+                pattern: /^1[34578]\d{9}$/,
+                message: `Đầu vào không phải là số điện thoại hợp lệ!`,
+              },
+            ]}
+            label={`SĐT`}
+            hasFeedback
+            {...formItemLayout}
+          >
             <Input />
           </FormItem>
-          <FormItem name='email' rules={[{ required: true, pattern: /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/, message: i18n.t`The input is not valid E-mail!`, }]}
-            label={i18n.t`Email`} hasFeedback {...formItemLayout}>
-            <Input />
-          </FormItem>
-          <FormItem name='address' rules={[{ required: true, }]}
-            label={i18n.t`Address`} hasFeedback {...formItemLayout}>
-            <Cascader
-              style={{ width: '100%' }}
-              options={city}
-              placeholder={i18n.t`Pick an address`}
-            />
+          <FormItem
+            name="expiredTime"
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+            label={`Ngày hết hạn`}
+            hasFeedback
+            {...formItemLayout}
+          >
+            <DatePicker />
           </FormItem>
         </Form>
       </Modal>

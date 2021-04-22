@@ -5,81 +5,32 @@ const database = [
   {
     id: '1',
     icon: 'dashboard',
-    name: 'Bảng điều khiển',
+    name: 'Dashboard',
+    vi: {
+      name: 'Bảng điều khiển',
+    },
     route: '/dashboard',
   },
   {
     id: '2',
     breadcrumbParentId: '1',
-    name: 'Người dùng',
+    name: 'Keys',
+    vi: {
+      name: 'Quản lý key',
+    },
     icon: 'user',
     route: '/user',
-  },
-  {
-    id: '7',
-    breadcrumbParentId: '1',
-    name: 'Posts',
-    icon: 'shopping-cart',
-    route: '/post',
   },
   {
     id: '21',
     menuParentId: '-1',
     breadcrumbParentId: '2',
     name: 'User Detail',
+    vi: {
+      name: 'Chi tiết',
+    },
     route: '/user/:id',
-  },
-  {
-    id: '3',
-    breadcrumbParentId: '1',
-    name: 'Request',
-    icon: 'api',
-    route: '/request',
-  },
-  {
-    id: '4',
-    breadcrumbParentId: '1',
-    name: 'UI Element',
-    icon: 'camera-o',
-  },
-  {
-    id: '45',
-    breadcrumbParentId: '4',
-    menuParentId: '4',
-    name: 'Editor',
-    icon: 'edit',
-    route: '/editor',
-  },
-  {
-    id: '5',
-    breadcrumbParentId: '1',
-    name: 'Biểu đồ',
-    icon: 'code-o',
-  },
-  {
-    id: '51',
-    breadcrumbParentId: '5',
-    menuParentId: '5',
-    name: 'ECharts',
-    icon: 'line-chart',
-    route: '/chart/ECharts',
-  },
-  {
-    id: '52',
-    breadcrumbParentId: '5',
-    menuParentId: '5',
-    name: 'HighCharts',
-    icon: 'bar-chart',
-    route: '/chart/highCharts',
-  },
-  {
-    id: '53',
-    breadcrumbParentId: '5',
-    menuParentId: '5',
-    name: 'Rechartst',
-    icon: 'area-chart',
-    route: '/chart/Recharts',
-  },
+  }
 ]
 
 module.exports = {

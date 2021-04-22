@@ -1,6 +1,6 @@
 module.exports = {
-  siteName: 'VLHB Admin',
-  copyright: 'VLHB Admin  ©2020 VLCODER',
+  siteName: 'VL Key Admin',
+  copyright: 'VL Key Admin  ©2020 VLCODER',
   logoPath: '/logo.svg',
   apiPrefix: '/api/v1',
   fixedHeader: true, // sticky primary layout header

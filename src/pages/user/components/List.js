@@ -1,23 +1,22 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { Table, Modal, Avatar } from 'antd'
+import { Table, Modal } from 'antd'
 import { DropOption } from 'components'
-import { Trans, withI18n } from '@lingui/react'
 import { Link } from 'umi'
 import styles from './List.less'
+import moment from 'moment';
 
 const { confirm } = Modal
 
-@withI18n()
 class List extends PureComponent {
   handleMenuClick = (record, e) => {
-    const { onDeleteItem, onEditItem, i18n } = this.props
+    const { onDeleteItem, onEditItem } = this.props
 
     if (e.key === '1') {
       onEditItem(record)
     } else if (e.key === '2') {
       confirm({
-        title: i18n.t`Are you sure delete this record?`,
+        title: `Bạn có chắc chắn xóa bản ghi này không??`,
         onOk() {
           onDeleteItem(record.id)
         },
@@ -26,70 +25,60 @@ class List extends PureComponent {
   }
 
   render() {
-    const { onDeleteItem, onEditItem, i18n, ...tableProps } = this.props
+    const { onDeleteItem, onEditItem, ...tableProps } = this.props
 
     const columns = [
       {
-        title: <Trans>Avatar</Trans>,
-        dataIndex: 'avatar',
-        key: 'avatar',
-        width: 72,
-        fixed: 'left',
-        render: text => <Avatar style={{ marginLeft: 8 }} src={text} />,
-      },
-      {
-        title: <Trans>Name</Trans>,
+        title: 'Tên người dùng',
         dataIndex: 'name',
         key: 'name',
-        render: (text, record) => <Link to={`user/${record.id}`}>{text}</Link>,
+        width: '25%',
+        fixed: 'left',
       },
       {
-        title: <Trans>NickName</Trans>,
-        dataIndex: 'nickName',
-        key: 'nickName',
+        title: 'Key',
+        dataIndex: 'key',
+        key: 'key',
+        width: '25%',
+        render: (text, record) => <Link to={`user/${record._id}`}>{text}</Link>,
       },
       {
-        title: <Trans>Age</Trans>,
-        dataIndex: 'age',
-        key: 'age',
+        title: 'Trạng thái',
+        dataIndex: 'status',
+        key: 'status',
+        width: '7%',
+        render: text => <span>{text ? '✅' : '❌'}</span>,
       },
       {
-        title: <Trans>Gender</Trans>,
-        dataIndex: 'isMale',
-        key: 'isMale',
-        render: text => <span>{text ? 'Male' : 'Female'}</span>,
-      },
-      {
-        title: <Trans>Phone</Trans>,
+        title: 'SĐT',
         dataIndex: 'phone',
         key: 'phone',
+        width: '7%',
       },
       {
-        title: <Trans>Email</Trans>,
-        dataIndex: 'email',
-        key: 'email',
+        title: 'Ngày hết hạn',
+        dataIndex: 'expiredTime',
+        key: 'expiredTime',
+        render: text => <span>{moment.unix(text).format("DD-MM-YYYY HH:mm:ss")}</span>,
       },
       {
-        title: <Trans>Address</Trans>,
-        dataIndex: 'address',
-        key: 'address',
-      },
-      {
-        title: <Trans>CreateTime</Trans>,
+        title: 'Thời gian tạo',
         dataIndex: 'createTime',
         key: 'createTime',
+        render: text => <span>{moment.unix(text).format("DD-MM-YYYY HH:mm:ss")}</span>,
       },
       {
-        title: <Trans>Operation</Trans>,
+        title: 'Hành động',
         key: 'operation',
         fixed: 'right',
+        width: '8%',
         render: (text, record) => {
           return (
             <DropOption
               onMenuClick={e => this.handleMenuClick(record, e)}
               menuOptions={[
-                { key: '1', name: i18n.t`Update` },
-                { key: '2', name: i18n.t`Delete` },
+                { key: '1', name: `Cập nhật` },
+                { key: '2', name: `Xoá` },
               ]}
             />
           )
@@ -102,14 +91,14 @@ class List extends PureComponent {
         {...tableProps}
         pagination={{
           ...tableProps.pagination,
-          showTotal: total => i18n.t`Total ${total} Items`,
+          showTotal: total => `Tổng ${total} mục`,
         }}
         className={styles.table}
         bordered
         scroll={{ x: 1200 }}
         columns={columns}
         simple
-        rowKey={record => record.id}
+        rowKey={record => record._id}
       />
     )
   }

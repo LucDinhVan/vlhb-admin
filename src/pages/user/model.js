@@ -1,7 +1,7 @@
 import modelExtend from 'dva-model-extend'
 import api from 'api'
 import { pageModel } from 'utils/model'
-const { pathToRegexp } = require('path-to-regexp')
+const { pathToRegexp } = require("path-to-regexp")
 
 const {
   queryUserList,
@@ -23,7 +23,7 @@ export default modelExtend(pageModel, {
 
   subscriptions: {
     setup({ dispatch, history }) {
-      history.listen((location) => {
+      history.listen(location => {
         if (pathToRegexp('/user').exec(location.pathname)) {
           const payload = location.query || { page: 1, pageSize: 10 }
           dispatch({
@@ -55,12 +55,12 @@ export default modelExtend(pageModel, {
 
     *delete({ payload }, { call, put, select }) {
       const data = yield call(removeUser, { id: payload })
-      const { selectedRowKeys } = yield select((_) => _.user)
+      const { selectedRowKeys } = yield select(_ => _.user)
       if (data.success) {
         yield put({
           type: 'updateState',
           payload: {
-            selectedRowKeys: selectedRowKeys.filter((_) => _ !== payload),
+            selectedRowKeys: selectedRowKeys.filter(_ => _ !== payload),
           },
         })
       } else {

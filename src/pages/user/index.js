@@ -3,17 +3,15 @@ import PropTypes from 'prop-types'
 import { history } from 'umi'
 import { connect } from 'umi'
 import { Row, Col, Button, Popconfirm } from 'antd'
-import { withI18n } from '@lingui/react'
 import { Page } from 'components'
 import { stringify } from 'qs'
 import List from './components/List'
 import Filter from './components/Filter'
 import Modal from './components/Modal'
 
-@withI18n()
 @connect(({ user, loading }) => ({ user, loading }))
 class User extends PureComponent {
-  handleRefresh = (newQuery) => {
+  handleRefresh = newQuery => {
     const { location } = this.props
     const { query, pathname } = location
 
@@ -24,7 +22,7 @@ class User extends PureComponent {
           ...query,
           ...newQuery,
         },
-        { arrayFormat: 'repeat' },
+        { arrayFormat: 'repeat' }
       ),
     })
   }
@@ -49,21 +47,20 @@ class User extends PureComponent {
   }
 
   get modalProps() {
-    const { dispatch, user, loading, i18n } = this.props
+    const { dispatch, user, loading } = this.props
     const { currentItem, modalVisible, modalType } = user
 
     return {
-      i18n,
       item: modalType === 'create' ? {} : currentItem,
       visible: modalVisible,
       destroyOnClose: true,
       maskClosable: false,
       confirmLoading: loading.effects[`user/${modalType}`],
       title: `${
-        modalType === 'create' ? i18n.t`Create User` : i18n.t`Update User`
+        modalType === 'create' ? `Thêm key` : `Sửa key`
       }`,
       centered: true,
-      onOk: (data) => {
+      onOk: data => {
         dispatch({
           type: `user/${modalType}`,
           payload: data,
@@ -87,13 +84,13 @@ class User extends PureComponent {
       dataSource: list,
       loading: loading.effects['user/query'],
       pagination,
-      onChange: (page) => {
+      onChange: page => {
         this.handleRefresh({
           page: page.current,
           pageSize: page.pageSize,
         })
       },
-      onDeleteItem: (id) => {
+      onDeleteItem: id => {
         dispatch({
           type: 'user/delete',
           payload: id,
@@ -117,7 +114,7 @@ class User extends PureComponent {
       },
       rowSelection: {
         selectedRowKeys,
-        onChange: (keys) => {
+        onChange: keys => {
           dispatch({
             type: 'user/updateState',
             payload: {
@@ -130,15 +127,14 @@ class User extends PureComponent {
   }
 
   get filterProps() {
-    const { location, dispatch, i18n } = this.props
+    const { location, dispatch } = this.props
     const { query } = location
 
     return {
-      i18n,
       filter: {
         ...query,
       },
-      onFilterChange: (value) => {
+      onFilterChange: value => {
         this.handleRefresh({
           ...value,
         })
@@ -166,12 +162,12 @@ class User extends PureComponent {
             <Col>
               {`Đã chọn ${selectedRowKeys.length} mục `}
               <Popconfirm
-                title='Bạn có chắc chắn xóa những mục này không?'
-                placement='left'
+                title="Bạn có chắc chắn xóa những bản ghi này không?"
+                placement="left"
                 onConfirm={this.handleDeleteItems}
               >
-                <Button type='primary' style={{ marginLeft: 8 }}>
-                  Xoá
+                <Button type="primary" style={{ marginLeft: 8 }}>
+                  Remove
                 </Button>
               </Popconfirm>
             </Col>
