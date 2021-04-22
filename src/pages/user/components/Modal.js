@@ -1,7 +1,8 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { Form, Input, Radio, Modal, DatePicker } from 'antd'
-import moment from 'moment';
+import moment from 'moment'
+import { v4 as uuidv4 } from 'uuid'
 
 const FormItem = Form.Item
 
@@ -25,8 +26,7 @@ class UserModal extends PureComponent {
       .then((values) => {
         const data = {
           ...values,
-          expiredTime: moment(values.expiredTime.expiredTime).format("X"),
-          key: item.key,
+          expiredTime: moment(values.expiredTime.expiredTime).format('X'),
         }
         onOk(data)
       })
@@ -44,13 +44,22 @@ class UserModal extends PureComponent {
           name="control-ref"
           initialValues={{
             ...item,
-            expiredTime: moment.unix(item.expiredTime),
+            key: item.key ? item.key : uuidv4(),
+            status: item.status !== undefined? item.status: true,
+            expiredTime: item.expiredTime
+              ? moment.unix(item.expiredTime)
+              : moment().add(30, 'days'),
           }}
           layout="horizontal"
         >
           <FormItem
             name="name"
-            rules={[{ required: true }]}
+            rules={[
+              {
+                required: true,
+                message: `Vui lòng nhập tên người dùng!`,
+              },
+            ]}
             label={`Tên người dùng`}
             hasFeedback
             {...formItemLayout}
@@ -59,7 +68,12 @@ class UserModal extends PureComponent {
           </FormItem>
           <FormItem
             name="key"
-            rules={[{ required: true }]}
+            rules={[
+              {
+                required: true,
+                message: `Vui lòng nhập 1 key không trùng lặp!`,
+              },
+            ]}
             label={`Key`}
             hasFeedback
             {...formItemLayout}
@@ -68,14 +82,27 @@ class UserModal extends PureComponent {
           </FormItem>
           <FormItem
             name="status"
-            rules={[{ required: true }]}
+            rules={[
+              {
+                required: true,
+                message: `Vui lòng chọn trạng thái key!`,
+              },
+            ]}
             label={`Trạng thái`}
             hasFeedback
             {...formItemLayout}
           >
             <Radio.Group>
-              <Radio value><span role="img" aria-label="Activate">✅</span></Radio>
-              <Radio value={false}><span role="img" aria-label="Deactivate">❌</span></Radio>
+              <Radio value>
+                <span role="img" aria-label="Activate">
+                  ✅
+                </span>
+              </Radio>
+              <Radio value={false}>
+                <span role="img" aria-label="Deactivate">
+                  ❌
+                </span>
+              </Radio>
             </Radio.Group>
           </FormItem>
           <FormItem
@@ -83,7 +110,7 @@ class UserModal extends PureComponent {
             rules={[
               {
                 required: true,
-                pattern: /^1[34578]\d{9}$/,
+                pattern: /^0\d{9}$/,
                 message: `Đầu vào không phải là số điện thoại hợp lệ!`,
               },
             ]}
@@ -98,6 +125,7 @@ class UserModal extends PureComponent {
             rules={[
               {
                 required: true,
+                message: `Đầu vào không phải là thời gian hợp lệ!`,
               },
             ]}
             label={`Ngày hết hạn`}

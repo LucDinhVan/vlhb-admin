@@ -9,7 +9,7 @@ let usersListData = Mock.mock({
       id: '@id',
       name: '@name',
       key: '@last',
-      phone: /^1[34578]\d{9}$/,
+      phone: /^0\d{9}$/,
       'age|11-99': 1,
       address: '@county(true)',
       status: '@boolean',
@@ -191,16 +191,7 @@ module.exports = {
 
   [`POST ${ApiPrefix}/user`](req, res) {
     const newData = req.body
-    newData.createTime = Mock.mock('@now')
-    newData.avatar =
-      newData.avatar ||
-      Mock.Random.image(
-        '100x100',
-        Mock.Random.color(),
-        '#757575',
-        'png',
-        newData.nickName.substr(0, 1)
-      )
+    newData.createTime = 1618152032
     newData.id = Mock.mock('@id')
 
     database.unshift(newData)
