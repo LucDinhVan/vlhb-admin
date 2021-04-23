@@ -58,6 +58,11 @@ export default {
       changeOrigin: true,
       pathRewrite: { '^/api/v1/weather': '/v3/weather' },
     },
+    '/api/v1': {
+      target: isDevelopment ? 'http://127.0.0.1:3000/' : 'https://api.herokuapp.com/',
+      changeOrigin: true,
+      pathRewrite: { '^/api/v1': '' },
+    },
   },
   targets: { ie: 9 },
   // Theme for antd

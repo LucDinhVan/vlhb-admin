@@ -78,7 +78,7 @@ class UserModal extends PureComponent {
             hasFeedback
             {...formItemLayout}
           >
-            <Input />
+            <Input disabled/>
           </FormItem>
           <FormItem
             name="status"

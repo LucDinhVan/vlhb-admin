@@ -5,14 +5,12 @@ export default {
   logoutUser: '/user/logout',
   loginUser: 'POST /user/login',
 
-  queryUser: '/user/:id',
-  queryUserList: '/users',
-  updateUser: 'Patch /user/:id',
-  createUser: 'POST /user',
-  removeUser: 'DELETE /user/:id',
-  removeUserList: 'POST /users/delete',
-
-  queryPostList: '/posts',
+  queryUser: '/keys/:id',
+  queryUserList: '/keys',
+  updateUser: 'Patch /keys/:id',
+  createUser: 'POST /keys',
+  removeUser: 'DELETE /keys/:id',
+  removeUserList: 'POST /keys/delete',
 
   queryDashboard: '/dashboard',
 }

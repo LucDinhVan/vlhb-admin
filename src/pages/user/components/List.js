@@ -40,7 +40,7 @@ class List extends PureComponent {
         dataIndex: 'key',
         key: 'key',
         width: '25%',
-        render: (text, record) => <Link to={`user/${record._id}`}>{text}</Link>,
+        render: (text, record) => <Link to={`user/${record.id}`}>{text}</Link>,
       },
       {
         title: 'Trạng thái',
@@ -98,7 +98,7 @@ class List extends PureComponent {
         scroll={{ x: 1200 }}
         columns={columns}
         simple
-        rowKey={record => record._id}
+        rowKey={record => record.id}
       />
     )
   }

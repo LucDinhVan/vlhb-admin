@@ -27,8 +27,8 @@ class Filter extends Component {
     const { createTime } = fields
     if (createTime && createTime.length) {
       fields.createTime = [
-        moment(createTime[0]).format('YYYY-MM-DD'),
-        moment(createTime[1]).format('YYYY-MM-DD'),
+        moment(createTime[0]).unix(),
+        moment(createTime[1]).unix(),
       ]
     }
     return fields

@@ -8,6 +8,7 @@ const { CancelToken } = axios
 window.cancelRequest = new Map()
 
 export default function request(options) {
+  const sensitiveMethod = ['post', 'put', 'delete', 'patch']
   let { data, url, method = 'get' } = options
   const cloneData = cloneDeep(data)
 
@@ -33,13 +34,17 @@ export default function request(options) {
   }
 
   options.url = url
-  options.params = cloneData
+  if (!sensitiveMethod.includes(method.toLocaleLowerCase())) options.params = cloneData
   options.cancelToken = new CancelToken((cancel) => {
     window.cancelRequest.set(Symbol(Date.now()), {
       pathname: window.location.pathname,
       cancel,
     })
   })
+
+  axios.defaults.headers.common[
+    'Authorization'
+  ] = `Bearer ${window.localStorage.getItem('token')}`
 
   return axios(options)
     .then((response) => {
