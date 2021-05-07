@@ -59,7 +59,7 @@ export default {
       pathRewrite: { '^/api/v1/weather': '/v3/weather' },
     },
     '/api/v1': {
-      target: isDevelopment ? 'http://127.0.0.1:3000/' : 'https://api.herokuapp.com/',
+      target: isDevelopment ? 'http://127.0.0.1:3000/' : 'https://admin-key-manager.herokuapp.com/',
       changeOrigin: true,
       pathRewrite: { '^/api/v1': '' },
     },
